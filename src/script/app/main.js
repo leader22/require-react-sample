@@ -8,5 +8,5 @@ require([
     console.log(App);
     console.log('main');
 
-    React.render(<App name="foo" />, document.body);
+    React.render(<App name="foo" />, document.getElementById('js-app'));
 });
