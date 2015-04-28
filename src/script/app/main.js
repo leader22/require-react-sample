@@ -5,5 +5,18 @@ require([
     React,
     App
 ) => {
-    React.render(<App title="Input Box" />, document.getElementById('js-app-wrap'));
+
+    class Main {
+        constructor() {
+        }
+
+        start() {
+            React.render(
+                <App title="Input Box" />,
+                document.getElementById('js-app-wrap')
+            );
+        }
+    }
+
+    return (new Main()).start();
 });
