@@ -21,6 +21,6 @@ gulp.task('compileScript', function () {
         .pipe(gulp.dest(PATH.SCRIPT.DEST));
 });
 
-gulp.task('watch', function(){
+gulp.task('watch', ['compileScript'], function(){
     gulp.watch(PATH.SCRIPT.SRC, ['compileScript']);
 });
