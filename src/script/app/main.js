@@ -5,8 +5,5 @@ require([
     React,
     App
 ) => {
-    console.log(App);
-    console.log('main');
-
-    React.render(<App name="foo" />, document.getElementById('js-app'));
+    React.render(<App title="Input Box" />, document.getElementById('js-app-wrap'));
 });

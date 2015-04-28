@@ -1,8 +1,9 @@
 'use strict';
 
-var gulp  = require('gulp');
-var babel = require('gulp-babel');
-var react = require('gulp-react');
+var gulp    = require('gulp');
+var babel   = require('gulp-babel');
+var plumber = require('gulp-plumber');
+var notify  = require('gulp-notify');
 
 var PATH = {
     SCRIPT: {
@@ -15,8 +16,8 @@ var PATH = {
 gulp.task('compileScript', function () {
     return gulp
         .src(PATH.SCRIPT.SRC)
+        .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
         .pipe(babel())
-        .pipe(react())
         .pipe(gulp.dest(PATH.SCRIPT.DEST));
 });
 
