@@ -5,7 +5,8 @@
         baseUrl: '/dest/script',
         waitSeconds: 120,
         paths: {
-           'react': 'vendor/react/react-with-addons',
+           'react':        'vendor/react/react-with-addons',
+           'react-router': 'vendor/react-router/build/global/ReactRouter'
         },
         shim: {
         }

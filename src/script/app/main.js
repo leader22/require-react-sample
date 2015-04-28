@@ -1,20 +1,24 @@
 require([
-    'react',
-    'app/component/App'
+    'react', 'react-router',
+    'app/Routes',
 ], (
     React,
-    App
+    Router,
+    AppRoutes
 ) => {
 
     class Main {
         constructor() {
+            // データ取ってきたり？
         }
 
         start() {
-            React.render(
-                <App title="Input Box" />,
-                document.getElementById('js-app-wrap')
-            );
+            Router.run(AppRoutes, function (Handler) {
+                React.render(
+                    <Handler/>,
+                    document.getElementById('js-app-wrap')
+                );
+            });
         }
     }
 
