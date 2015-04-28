@@ -1,4 +1,4 @@
-(function() {
+(function(global) {
 
     let require = {
         urlArgs: '_=' + (new Date()).getTime(),
@@ -11,18 +11,12 @@
         }
     };
 
-    let _inBrowser, _inNode;
-    try {
-        _inBrowser = 'document' in window;
-        _inNode    = false;
-    } catch(e) {
-        _inBrowser = false;
-        _inNode    = true;
-    }
+    let _inNode    = 'process'  in global;
+    let _inBrowser = 'document' in global;
+
     if (_inNode) {
         module.exports = require;
     } else if (_inBrowser) {
-        window.require = require;
+        global.require = require;
     }
-
-}());
+})(typeof global !== 'undefined' ? global : window);
