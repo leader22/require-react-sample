@@ -34,6 +34,7 @@ define([
             return (
                 <div>
                     <h1>{this.props.title}</h1>
+                    <hr />
                     <pre>{this.state.text}</pre>
                     <Inputbox ref="input" onUpdate={this._onUpdate} />
                 </div>
