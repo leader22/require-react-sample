@@ -2,7 +2,7 @@
 
     let require = {
         urlArgs: '_=' + (new Date()).getTime(),
-        baseUrl: '/dest/script',
+        baseUrl: 'dest/script',
         waitSeconds: 120,
         paths: {
            'react':        'vendor/react/react-with-addons',
