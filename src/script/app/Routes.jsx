@@ -11,8 +11,7 @@ define([
     Input
 ) => {
 
-    let Route = Router.Route;
-    let DefaultRoute = Router.DefaultRoute;
+    let { Route, DefaultRoute } = Router;
 
     let Routes = (
         <Route name="app" path="/" handler={App}>

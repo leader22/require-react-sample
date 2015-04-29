@@ -5,8 +5,7 @@ define([
     Router
 ) => {
 
-    let RouteHandler = Router.RouteHandler;
-    let Link = Router.Link;
+    let { RouteHandler, Link } = Router;
 
     let App = React.createClass({
         render() {

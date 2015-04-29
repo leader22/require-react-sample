@@ -5,7 +5,7 @@ define([
     Router
 ) => {
 
-    let Link = Router.Link;
+    let { Link } = Router;
 
     let Top = React.createClass({
         render() {
