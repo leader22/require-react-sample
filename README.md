@@ -7,3 +7,4 @@
 
 ## TODOS
 - [ ] vendorsをrjs
+- [ ] var { Route, DefaultRoute, RouteHandler, Link } = Router;

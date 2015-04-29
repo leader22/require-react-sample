@@ -12,6 +12,10 @@ var plumber = require('gulp-plumber');
 var notify  = require('gulp-notify');
 var bower   = require('gulp-bower');
 var del     = require('del');
+var amdOptimize = require('amd-optimize');
+var concat  = require('gulp-concat');
+var uglify  = require('gulp-uglify');
+var rename  = require('gulp-rename');
 
 
 /**
@@ -22,7 +26,7 @@ var del     = require('del');
 var PATH = {
     SCRIPT: {
         SRC:  ['./src/script/**/*.js', './src/script/**/*.jsx'],
-        DEST: './dest/script'
+        DIST: './dist/script'
     },
     STYLE: {}
 };
@@ -34,7 +38,7 @@ var PATH = {
  *
  */
 gulp.task('clean:script', function() {
-    return del([PATH.SCRIPT.DEST]);
+    return del([PATH.SCRIPT.DIST]);
 });
 
 gulp.task('init', ['clean:script', 'compile:script'], function() {
@@ -45,9 +49,9 @@ gulp.task('compile:script', function () {
     return gulp
         .src(PATH.SCRIPT.SRC)
         .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
-        .pipe(changed(PATH.SCRIPT.DEST))
+        .pipe(changed(PATH.SCRIPT.DIST))
         .pipe(babel())
-        .pipe(gulp.dest(PATH.SCRIPT.DEST));
+        .pipe(gulp.dest(PATH.SCRIPT.DIST));
 });
 
 gulp.task('watch:script', ['compile:script'], function(){
@@ -55,6 +59,15 @@ gulp.task('watch:script', ['compile:script'], function(){
         .watch(PATH.SCRIPT.SRC, ['compile:script']);
 });
 
+gulp.task('bundle:script', function() {
+    var config = require('./dist/script/RequireConfig.js');
+
+    return gulp.src(PATH.SCRIPT.DIST+'/**/*.js')
+        .pipe(amdOptimize('app/Main', config))
+        .pipe(concat('main.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/bundle'));
+});
 
 /**
  *
