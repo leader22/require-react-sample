@@ -8,7 +8,7 @@ var notify  = require('gulp-notify');
 
 var PATH = {
     SCRIPT: {
-        SRC:  './src/script/**/*.js',
+        SRC:  ['./src/script/**/*.js', './src/script/**/*.jsx'],
         DEST: './dest/script'
     },
     STYLE: {}

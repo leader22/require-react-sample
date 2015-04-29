@@ -33,7 +33,7 @@ define([
         render() {
             return (
                 <div>
-                    <h1>{this.props.title}</h1>
+                    <h1>インプットBOX</h1>
                     <hr />
                     <pre>{this.state.text}</pre>
                     <Inputbox ref="input" onUpdate={this._onUpdate} />

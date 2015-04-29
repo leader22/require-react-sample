@@ -24,7 +24,7 @@ define([
             this.props.onUpdate(val);
         },
 
-        render () {
+        render() {
             return (
                 <div>
                     <input type="text" value={this.state.value} onChange={this._onChange} />

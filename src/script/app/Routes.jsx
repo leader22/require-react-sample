@@ -1,11 +1,13 @@
 define([
     'react', 'react-router',
-    'app/component/App',
+    'common/component/App',
+    'app/component/Top',
     'app/component/Input'
 ], (
     React,
     Router,
     App,
+    Top,
     Input
 ) => {
 
@@ -14,8 +16,8 @@ define([
 
     let Routes = (
         <Route name="app" path="/" handler={App}>
-            <Route name="input" handler={Input}/>
-            <DefaultRoute handler={Input}/>
+            <DefaultRoute handler={Top} />
+            <Route name="input" handler={Input} />
         </Route>
     );
 
