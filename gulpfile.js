@@ -12,7 +12,7 @@ var plumber = require('gulp-plumber');
 var notify  = require('gulp-notify');
 var bower   = require('gulp-bower');
 var del     = require('del');
-var amdOptimize = require('amd-optimize');
+var amdOptm = require('amd-optimize');
 var concat  = require('gulp-concat');
 var uglify  = require('gulp-uglify');
 var rename  = require('gulp-rename');
@@ -25,8 +25,11 @@ var rename  = require('gulp-rename');
  */
 var PATH = {
     SCRIPT: {
-        SRC:  ['./src/script/**/*.js', './src/script/**/*.jsx'],
-        DIST: './dist/script'
+        SRC:      ['./src/script/**/*.js', './src/script/**/*.jsx'],
+        SRC_DIR:  './src/script',
+        DIST:     './dist/script/**/*.js',
+        DIST_DIR: './dist/script',
+        BUNDLE:   './dist/bundle'
     },
     STYLE: {}
 };
@@ -38,7 +41,7 @@ var PATH = {
  *
  */
 gulp.task('clean:script', function() {
-    return del([PATH.SCRIPT.DIST]);
+    return del([PATH.SCRIPT.DIST_DIR]);
 });
 
 gulp.task('init', ['clean:script', 'compile:script'], function() {
@@ -49,9 +52,9 @@ gulp.task('compile:script', function () {
     return gulp
         .src(PATH.SCRIPT.SRC)
         .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
-        .pipe(changed(PATH.SCRIPT.DIST))
+        .pipe(changed(PATH.SCRIPT.DIST_DIR))
         .pipe(babel())
-        .pipe(gulp.dest(PATH.SCRIPT.DIST));
+        .pipe(gulp.dest(PATH.SCRIPT.DIST_DIR));
 });
 
 gulp.task('watch:script', ['compile:script'], function(){
@@ -60,14 +63,14 @@ gulp.task('watch:script', ['compile:script'], function(){
 });
 
 gulp.task('bundle:script', function() {
-    var config = require('./dist/script/RequireConfig.js');
-
-    return gulp.src(PATH.SCRIPT.DIST+'/**/*.js')
-        .pipe(amdOptimize('app/Main', config))
+    return gulp
+        .src(PATH.SCRIPT.DIST)
+        .pipe(amdOptm('app/Main', require(PATH.SCRIPT.DIST_DIR+'/RequireConfig.js')))
         .pipe(concat('main.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('dist/bundle'));
+        .pipe(gulp.dest(PATH.SCRIPT.BUNDLE));
 });
+
 
 /**
  *
