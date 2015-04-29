@@ -24,11 +24,11 @@ var uglify  = require('gulp-uglify');
  */
 var PATH = {
     SCRIPT: {
-        SRC:      ['./src/script/**/*.js', './src/script/**/*.jsx'],
-        SRC_DIR:  './src/script',
-        DIST:     './dist/script/**/*.js',
-        DIST_DIR: './dist/script',
-        BUNDLE:   './dist/bundle'
+        SRC:        ['./src/script/**/*.js', './src/script/**/*.jsx'],
+        SRC_DIR:    './src/script',
+        DIST:       './dist/script/**/*.js',
+        DIST_DIR:   './dist/script',
+        BUNDLE_DIR: './dist/bundle'
     },
     STYLE: {}
 };
@@ -40,7 +40,7 @@ var PATH = {
  *
  */
 gulp.task('clean:script', function() {
-    return del([PATH.SCRIPT.DIST_DIR]);
+    return del([PATH.SCRIPT.DIST_DIR, PATH.SCRIPT.BUNDLE_DIR]);
 });
 
 gulp.task('init', ['clean:script', 'compile:script'], function() {
@@ -68,7 +68,7 @@ gulp.task('bundle:script', function() {
         .pipe(amdOptm('app/Main', require(PATH.SCRIPT.DIST_DIR+'/RequireConfig.js')))
         .pipe(concat('main.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest(PATH.SCRIPT.BUNDLE));
+        .pipe(gulp.dest(PATH.SCRIPT.BUNDLE_DIR));
 });
 
 
