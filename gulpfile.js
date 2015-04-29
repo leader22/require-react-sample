@@ -1,11 +1,24 @@
 'use strict';
 
+/**
+ *
+ * Deps
+ *
+ */
 var gulp    = require('gulp');
 var babel   = require('gulp-babel');
 var changed = require('gulp-changed');
 var plumber = require('gulp-plumber');
 var notify  = require('gulp-notify');
+var bower   = require('gulp-bower');
+var del     = require('del');
 
+
+/**
+ *
+ * Constants
+ *
+ */
 var PATH = {
     SCRIPT: {
         SRC:  ['./src/script/**/*.js', './src/script/**/*.jsx'],
@@ -13,6 +26,20 @@ var PATH = {
     },
     STYLE: {}
 };
+
+
+/**
+ *
+ * Tasks
+ *
+ */
+gulp.task('clean:script', function() {
+    return del([PATH.SCRIPT.DEST]);
+});
+
+gulp.task('init', ['clean:script', 'compile:script'], function() {
+    return bower();
+});
 
 gulp.task('compile:script', function () {
     return gulp
@@ -23,7 +50,16 @@ gulp.task('compile:script', function () {
         .pipe(gulp.dest(PATH.SCRIPT.DEST));
 });
 
-gulp.task('watch', ['compile:script'], function(){
-    gulp.watch(PATH.SCRIPT.SRC, ['compile:script']);
+gulp.task('watch:script', ['compile:script'], function(){
+    return gulp
+        .watch(PATH.SCRIPT.SRC, ['compile:script']);
 });
-gulp.task('w', ['watch']);
+
+
+/**
+ *
+ * Aliases
+ *
+ */
+gulp.task('w', ['watch:script']);
+gulp.task('default', ['init']);
