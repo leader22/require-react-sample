@@ -14,7 +14,7 @@ var PATH = {
     STYLE: {}
 };
 
-gulp.task('compileScript', function () {
+gulp.task('compile:script', function () {
     return gulp
         .src(PATH.SCRIPT.SRC)
         .pipe(plumber({errorHandler: notify.onError('<%= error.message %>')}))
@@ -23,6 +23,7 @@ gulp.task('compileScript', function () {
         .pipe(gulp.dest(PATH.SCRIPT.DEST));
 });
 
-gulp.task('watch', ['compileScript'], function(){
-    gulp.watch(PATH.SCRIPT.SRC, ['compileScript']);
+gulp.task('watch', ['compile:script'], function(){
+    gulp.watch(PATH.SCRIPT.SRC, ['compile:script']);
 });
+gulp.task('w', ['watch']);
