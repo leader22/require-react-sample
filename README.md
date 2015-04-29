@@ -5,6 +5,5 @@
 - Require.js
 - React.js
 
-## TODOS
-- [ ] vendorsをrjs
-- [ ] var { Route, DefaultRoute, RouteHandler, Link } = Router;
+## MEMO
+- requireやvendorを切り出すのは、defineが散乱してエラーになるので諦め
