@@ -6,5 +6,4 @@
 - React.js
 
 ## TODOS
-- [ ] bowerをgulpで
 - [ ] vendorsをrjs
