@@ -15,7 +15,7 @@ require([
         start() {
             Router.run(AppRoutes, function (Handler) {
                 React.render(
-                    <Handler/>,
+                    <Handler />,
                     document.getElementById('js-app-wrap')
                 );
             });
