@@ -15,7 +15,6 @@ var del     = require('del');
 var amdOptm = require('amd-optimize');
 var concat  = require('gulp-concat');
 var uglify  = require('gulp-uglify');
-var rename  = require('gulp-rename');
 
 
 /**
@@ -63,6 +62,7 @@ gulp.task('watch:script', ['compile:script'], function(){
 });
 
 gulp.task('bundle:script', function() {
+    // SPAが増えたらココに追記
     return gulp
         .src(PATH.SCRIPT.DIST)
         .pipe(amdOptm('app/Main', require(PATH.SCRIPT.DIST_DIR+'/RequireConfig.js')))
@@ -77,5 +77,6 @@ gulp.task('bundle:script', function() {
  * Aliases
  *
  */
-gulp.task('w', ['watch:script']);
+gulp.task('dev', ['watch:script']);
+gulp.task('build', ['init', 'bundle:script']);
 gulp.task('default', ['init']);
